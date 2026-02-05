@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   # PostgreSQL Database
   postgres:
@@ -17,21 +19,42 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - blog-network
 
-  # Prisma Studio (Optional - Database GUI)
-  # Uncomment to run Prisma Studio in Docker
-  # prisma-studio:
-  #   image: node:18-alpine
-  #   container_name: blog-cms-prisma-studio
-  #   working_dir: /app
-  #   ports:
-  #     - "5555:5555"
-  #   volumes:
-  #     - .:/app
-  #   command: sh -c "npm install && npx prisma studio"
-  #   depends_on:
-  #     - postgres
+  # API Service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blog-cms-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/blog_cms?schema=public
+      JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-this-in-production}
+      JWT_EXPIRES_IN: 7d
+      LOG_LEVEL: info
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - blog-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: sh -c "npx prisma migrate deploy && node dist/server.js"
 
 volumes:
   postgres_data:
     driver: local
+
+networks:
+  blog-network:
+    driver: bridge
