@@ -791,14 +791,6 @@ Built as a professional portfolio project demonstrating:
 
 ---
 
-## 📞 Support
-
-For questions or feedback:
-- Create an issue in the repository
-- Contact: [Your Email/LinkedIn]
-
----
-
 <div align="center">
   <p>⭐ Star this project if you find it useful!</p>
   <p>Made with ❤️ and TypeScript</p>
