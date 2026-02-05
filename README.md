@@ -2,6 +2,17 @@
 
 A professional RESTful Blog/CMS API built with Express, TypeScript, and Node.js - perfect for portfolio projects and Upwork applications.
 
+## 📚 Documentation
+
+- **[DATABASE_WORKFLOW.md](./DATABASE_WORKFLOW.md)** - Complete guide on database management, Prisma usage, and workflows
+- **[DOCKER_SETUP.md](./DOCKER_SETUP.md)** - Docker PostgreSQL setup and troubleshooting
+- **[DATABASE_SETUP.md](./DATABASE_SETUP.md)** - All database setup options (Docker, Cloud, Local)
+- **[ENTITIES.md](./ENTITIES.md)** - Entity design and relationships
+- **[ROLES.md](./ROLES.md)** - Role-based access control documentation
+- **[Services README](./src/services/README.md)** - How to use service layer
+
+---
+
 ## 📖 What This API Does
 
 This is a **full-featured blog content management system** that provides backend services for creating, managing, and publishing blog content. It handles user authentication, role-based authorization, post management, commenting system, and content moderation - everything needed to power a modern blogging platform.
@@ -24,26 +35,85 @@ This is a **full-featured blog content management system** that provides backend
 
 ## Setup
 
-1. Install dependencies:
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-2. Create a `.env` file (copy from `.env.example`):
+### 2. Setup Database
+
+**🐳 Option A: Docker (Recommended! ⭐)**
+
+Easiest option - no PostgreSQL installation needed!
+
+```bash
+# Install Docker Desktop first: https://www.docker.com/products/docker-desktop
+
+npm run docker:up      # Start PostgreSQL container
+```
+
+**Option B: Cloud PostgreSQL** (Quick start - free tier)
+- [Supabase](https://supabase.com) - Free forever plan
+- [Neon](https://neon.tech) - Serverless PostgreSQL  
+- [Railway](https://railway.app) - Simple deployment
+
+**Option C: Local PostgreSQL** (Traditional way)
+```bash
+# macOS
+brew install postgresql@15
+brew services start postgresql@15
+createdb blog_cms
+```
+
+See [DOCKER_SETUP.md](./DOCKER_SETUP.md) or [DATABASE_SETUP.md](./DATABASE_SETUP.md) for detailed instructions.
+
+### 3. Configure Environment
+
+Create `.env` file:
 ```bash
 cp .env.example .env
 ```
 
-3. Start the development server:
+Update the `DATABASE_URL` in `.env`:
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/blog_cms?schema=public"
+```
+
+### 4. Run Database Migrations
+```bash
+npm run db:generate  # Generate Prisma Client
+npm run db:migrate   # Create database tables
+```
+
+### 5. Test Database (Optional)
+```bash
+npm run db:test      # Run test script with sample data
+```
+
+### 6. Start Development Server
 ```bash
 npm run dev
 ```
 
 ## Scripts
 
+### Development
 - `npm run dev` - Start development server with hot reload
 - `npm run build` - Build TypeScript to JavaScript
 - `npm start` - Run production build
+
+### Docker
+- `npm run docker:up` - Start PostgreSQL container
+- `npm run docker:down` - Stop PostgreSQL container
+- `npm run docker:logs` - View PostgreSQL logs
+- `npm run docker:restart` - Restart PostgreSQL
+
+### Database
+- `npm run db:generate` - Generate Prisma Client
+- `npm run db:migrate` - Run database migrations
+- `npm run db:studio` - Open Prisma Studio (DB GUI)
+- `npm run db:test` - Run database test script
+- `npm run db:reset` - Reset database (careful!)
 
 ## API Endpoints
 
@@ -54,6 +124,8 @@ npm run dev
 
 - **Express.js** - Web framework
 - **TypeScript** - Type-safe JavaScript
+- **PostgreSQL** - Relational database
+- **Prisma ORM** - Type-safe database client
 - **dotenv** - Environment variable management
 - **ts-node** - TypeScript execution
 - **nodemon** - Development hot reload

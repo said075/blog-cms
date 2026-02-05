@@ -7,6 +7,15 @@
     "dev": "nodemon",
     "build": "tsc",
     "start": "node dist/server.js",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f postgres",
+    "docker:restart": "docker-compose restart postgres",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio",
+    "db:test": "ts-node src/scripts/test-db.ts",
+    "db:reset": "prisma migrate reset",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,8 +31,10 @@
   },
   "homepage": "https://github.com/said075/blog-cms#readme",
   "dependencies": {
+    "@prisma/client": "^7.3.0",
     "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "prisma": "^7.3.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
