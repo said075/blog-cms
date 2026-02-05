@@ -16,6 +16,8 @@
     "db:studio": "prisma studio",
     "db:test": "ts-node src/scripts/test-db.ts",
     "db:reset": "prisma migrate reset",
+    "test:auth": "ts-node src/scripts/test-auth.ts",
+    "test:posts": "ts-node src/scripts/test-posts.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,13 +33,21 @@
   },
   "homepage": "https://github.com/said075/blog-cms#readme",
   "dependencies": {
-    "@prisma/client": "^7.3.0",
+    "@prisma/adapter-pg": "^7.3.0",
+    "@prisma/client": "^5.22.0",
+    "@types/pg": "^8.16.0",
+    "axios": "^1.13.4",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "prisma": "^7.3.0"
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.18.0",
+    "prisma": "^5.22.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.2.0",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",

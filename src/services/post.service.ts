@@ -203,6 +203,7 @@ export class PostService {
 
   /**
    * Update post
+   * Note: Admin check is done in middleware, so we only verify ownership here for non-admins
    */
   async updatePost(id: string, authorId: string, data: {
     title?: string;

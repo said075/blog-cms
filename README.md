@@ -4,12 +4,16 @@ A professional RESTful Blog/CMS API built with Express, TypeScript, and Node.js 
 
 ## 📚 Documentation
 
-- **[DATABASE_WORKFLOW.md](./DATABASE_WORKFLOW.md)** - Complete guide on database management, Prisma usage, and workflows
-- **[DOCKER_SETUP.md](./DOCKER_SETUP.md)** - Docker PostgreSQL setup and troubleshooting
-- **[DATABASE_SETUP.md](./DATABASE_SETUP.md)** - All database setup options (Docker, Cloud, Local)
+- **[QUICKSTART.md](./QUICKSTART.md)** ⚡ - Get started in 5 minutes
+- **[AUTHENTICATION.md](./AUTHENTICATION.md)** 🔐 - Complete authentication guide (JWT, signup, login)
+- **[POST_API.md](./POST_API.md)** 📝 - Post CRUD API documentation
+- **[DATABASE_WORKFLOW.md](./DATABASE_WORKFLOW.md)** - Database management and Prisma usage
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture overview
+- **[DOCKER_SETUP.md](./DOCKER_SETUP.md)** - Docker PostgreSQL setup
+- **[DATABASE_SETUP.md](./DATABASE_SETUP.md)** - Database setup options
 - **[ENTITIES.md](./ENTITIES.md)** - Entity design and relationships
-- **[ROLES.md](./ROLES.md)** - Role-based access control documentation
-- **[Services README](./src/services/README.md)** - How to use service layer
+- **[ROLES.md](./ROLES.md)** - Role-based access control
+- **[Services README](./src/services/README.md)** - Service layer guide
 
 ---
 
@@ -115,10 +119,41 @@ npm run dev
 - `npm run db:test` - Run database test script
 - `npm run db:reset` - Reset database (careful!)
 
+### Testing
+- `npm run test:auth` - Test authentication system ✅ (8/8 passing)
+- `npm run test:posts` - Test post CRUD operations ✅ (12/12 passing)
+
+> **Status**: All tests verified on Feb 5, 2026. See [TESTING_SUMMARY.md](./TESTING_SUMMARY.md) for details.
+
 ## API Endpoints
 
+### Public Routes
 - `GET /` - API welcome message
 - `GET /health` - Health check endpoint
+
+### Authentication (`/api/auth`)
+- `POST /api/auth/signup` - Register new user
+- `POST /api/auth/login` - Login and get JWT token
+- `GET /api/auth/me` - Get current user (protected)
+- `PUT /api/auth/change-password` - Change password (protected)
+- `POST /api/auth/logout` - Logout
+
+### Posts (`/api/posts`)
+- `POST /api/posts` - Create post (AUTHOR/ADMIN only)
+- `GET /api/posts` - List all posts with filters
+- `GET /api/posts/:id` - Get post by ID
+- `GET /api/posts/slug/:slug` - Get post by slug
+- `GET /api/posts/my/posts` - Get own posts (protected)
+- `GET /api/posts/stats` - Get statistics (protected)
+- `PUT /api/posts/:id` - Update post (owner/ADMIN)
+- `DELETE /api/posts/:id` - Delete post (owner/ADMIN)
+
+### Demo Protected Routes
+- `GET /api/protected` - Requires authentication
+- `GET /api/admin` - Requires ADMIN role
+- `GET /api/author` - Requires AUTHOR or ADMIN role
+
+> **Note:** See [AUTHENTICATION.md](./AUTHENTICATION.md) and [POST_API.md](./POST_API.md) for complete documentation
 
 ## Tech Stack
 
@@ -126,6 +161,8 @@ npm run dev
 - **TypeScript** - Type-safe JavaScript
 - **PostgreSQL** - Relational database
 - **Prisma ORM** - Type-safe database client
+- **JWT** - JSON Web Tokens for authentication
+- **bcrypt** - Password hashing
 - **dotenv** - Environment variable management
 - **ts-node** - TypeScript execution
 - **nodemon** - Development hot reload
