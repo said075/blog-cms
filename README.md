@@ -165,6 +165,8 @@ npm run dev
 - **Prisma ORM** - Type-safe database client
 - **JWT** - JSON Web Tokens for authentication
 - **bcrypt** - Password hashing
+- **Winston** - Professional logging
+- **Morgan** - HTTP request logging
 - **dotenv** - Environment variable management
 - **ts-node** - TypeScript execution
 - **nodemon** - Development hot reload

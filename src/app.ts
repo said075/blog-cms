@@ -4,12 +4,18 @@ import postRoutes from './routes/post.routes';
 import commentRoutes from './routes/comment.routes';
 import { authMiddleware } from './middlewares/auth.middleware';
 import { requireAdmin, requireAuthor } from './middlewares/role.middleware';
+import { requestLogger } from './middlewares/request-logger.middleware';
+import { errorHandler, notFoundHandler } from './middlewares/error.middleware';
+import logger from './utils/logger';
 
 const app: Application = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Request logging
+app.use(requestLogger);
 
 // Basic routes
 app.get('/', (req: Request, res: Response) => {
@@ -65,17 +71,10 @@ app.get('/api/author', authMiddleware, requireAuthor, (req: Request, res: Respon
   });
 });
 
-// TODO: Add more routes here
-// app.use('/api/users', userRoutes);
-// app.use('/api/comments', commentRoutes);
-// app.use('/api/categories', categoryRoutes);
+// 404 handler - must be after all routes
+app.use(notFoundHandler);
 
-// 404 handler
-app.use((req: Request, res: Response) => {
-  res.status(404).json({
-    success: false,
-    error: 'Route not found'
-  });
-});
+// Global error handler - must be last
+app.use(errorHandler);
 
 export default app;
