@@ -13,7 +13,7 @@
 
 ## 🎯 What This API Does
 
-A complete, **Upwork-ready** Blog/CMS API with:
+A complete Blog/CMS API with:
 - ✅ **User Authentication** (JWT-based, bcrypt password hashing)
 - ✅ **Role-Based Access Control** (ADMIN, AUTHOR, READER)
 - ✅ **Post Management** (CRUD + advanced features)
