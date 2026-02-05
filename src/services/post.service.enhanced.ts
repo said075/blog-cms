@@ -1,5 +1,5 @@
 /**
- * Post Service with Production-Ready Features
+ * Enhanced Post Service with Production-Ready Features
  * - Advanced pagination with metadata
  * - Full-text search
  * - Multiple filters and sorting
@@ -66,7 +66,7 @@ interface PaginatedResponse<T> {
   };
 }
 
-export class PostService {
+export class EnhancedPostService {
   /**
    * Create a new post with auto-generated slug
    */
@@ -448,4 +448,4 @@ export class PostService {
   }
 }
 
-export default new PostService();
+export default new EnhancedPostService();

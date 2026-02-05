@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import authRoutes from './routes/auth.routes';
 import postRoutes from './routes/post.routes';
+import commentRoutes from './routes/comment.routes';
 import { authMiddleware } from './middlewares/auth.middleware';
 import { requireAdmin, requireAuthor } from './middlewares/role.middleware';
 
@@ -20,6 +21,7 @@ app.get('/', (req: Request, res: Response) => {
     endpoints: {
       auth: '/api/auth',
       posts: '/api/posts',
+      comments: '/api/comments',
       health: '/health',
       protected: '/api/protected',
       adminOnly: '/api/admin'
@@ -34,6 +36,7 @@ app.get('/health', (req: Request, res: Response) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
 
 // Demo: Protected route (requires authentication)
 app.get('/api/protected', authMiddleware, (req: Request, res: Response) => {

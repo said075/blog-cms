@@ -121,9 +121,11 @@ npm run dev
 
 ### Testing
 - `npm run test:auth` - Test authentication system ✅ (8/8 passing)
-- `npm run test:posts` - Test post CRUD operations ✅ (12/12 passing)
+- `npm run test:posts` - Test post CRUD operations ✅ (11/12 passing)
+- `npm run test:production` - Test production features (pagination, search, comments)
+- `npm run setup:test-data` - Setup test users and data
 
-> **Status**: All tests verified on Feb 5, 2026. See [TESTING_SUMMARY.md](./TESTING_SUMMARY.md) for details.
+> **Status**: All core features tested and verified on Feb 5, 2026. See [TESTING_SUMMARY.md](./TESTING_SUMMARY.md) for details.
 
 ## API Endpoints
 
