@@ -26,8 +26,6 @@ A complete, **Upwork-ready** Blog/CMS API with:
 - ✅ **TypeScript** (100% type-safe)
 - ✅ **Clean Architecture** (MVC + Services pattern)
 
-Perfect for freelance projects, portfolio demonstrations, or as a starter for production applications.
-
 ---
 
 ## 🛠️ Tech Stack
